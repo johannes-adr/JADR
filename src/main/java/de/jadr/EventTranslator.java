@@ -26,7 +26,7 @@ public class EventTranslator implements EventListener {
 			dcbot.callEvent(new Event.MessageReceived(er.getChannel(), er.getMessage(), er.getMember()));
 			try {
 				Command.call(er);
-			} catch (CommandNotFoundException | WrongCommandArgsException | MissingPermsException e1) {
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
