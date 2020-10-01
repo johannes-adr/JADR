@@ -41,10 +41,10 @@ public class Event {
 		public Member getAuthor() {
 			return mem;
 		}
-		public Message response(String msg) {
+		public Message respond(String msg) {
 			return tc.sendMessage(msg).complete();
 		}
-		public Message response(EmbedBuilder msg) {
+		public Message respond(EmbedBuilder msg) {
 			return tc.sendMessage(msg.build()).complete();
 		}
 		

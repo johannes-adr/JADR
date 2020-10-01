@@ -1,5 +1,9 @@
 package de.jadr;
 
+import de.jadr.commands.Command;
+import de.jadr.commands.exceptions.CommandNotFoundException;
+import de.jadr.commands.exceptions.MissingPermsException;
+import de.jadr.commands.exceptions.WrongCommandArgsException;
 import de.jadr.eventwrapper.Event;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
@@ -20,6 +24,11 @@ public class EventTranslator implements EventListener {
 			GuildMessageReceivedEvent er = (GuildMessageReceivedEvent) e;
 			if(er.getAuthor().getIdLong() == dcbot.getJDA().getSelfUser().getIdLong())return;
 			dcbot.callEvent(new Event.MessageReceived(er.getChannel(), er.getMessage(), er.getMember()));
+			try {
+				Command.call(er);
+			} catch (CommandNotFoundException | WrongCommandArgsException | MissingPermsException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 }
